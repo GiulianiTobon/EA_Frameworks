@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return view ('dashboard.post.index', ['category'=>$category]);
     }
 
     /**
@@ -35,7 +35,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create($request->validate());
+        return view('status','Category creada con exito');
     }
 
     /**
@@ -69,7 +70,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        Category::create($request->validate());
+        $category->update();
+        return back()-with('status');
     }
 
     /**
