@@ -5,13 +5,13 @@
 <table class="table">
     <thead>
         <tr>
-            <td>ID</td>
-            <td>Nombre</td>
-            <td>Categoría</td>
-            <td>Estado publicación</td>
-            <td>Creación</td>
-            <td>Actualización</td>
-            <td>Acciones</td>
+            <td scope="col">ID</td>
+            <td scope="col">Nombre</td>
+            <td scope="col">Categoría</td>
+            <td scope="col">Posteado</td>
+            <td scope="col">Creación</td>
+            <td scope="col">Actualización</td>
+            <td scope="col">Acciones</td>
         </tr>
     </thead>
     <tbody>

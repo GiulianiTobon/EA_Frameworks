@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
-Route::get('/home','HomeController@index')->name('home');
+
 Route::resource('/dashboard/post', 'PostController');
 Route::resource('/dashboard/category','CategoryController');
+Route::post('dashboard/post/{post}/image', 'PostController@image')->name('post.image');
+
+Route::get('/', 'WebController@index')->name('index');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -59,7 +59,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('dashboard.post.edit',["post"=>$post]);
+        dd($post->image);
+        $categories = Category::pluck('id','title');
+        return view('dashboard.post.edit',["post"=>$post,'categories'=>$categories]);
     }
 
     /**
@@ -86,5 +88,22 @@ class PostController extends Controller
     {
         $post->delete();
         return back()->with('status', "Post eliminado exitosamente");
+    }
+
+    /** 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\PostImage  $post
+     * @return \Illuminate\Http\Response
+    */
+    public function image(Request $request, Post $post){
+        $request->validate([
+            'image'=> 'require|mimes:jpeg,bmp,png|max:10240',//10Mb
+        ]);
+        $filename = time(). "." . $request->image->extension(); /*Nombre de las imagenes */
+        /* Almacenar imagen en el servidor funcion move(especificar path) dentro de la carpeta public */
+        $request->image->move(public_path('images'),$filename);
+        echo "Subio la imagen ".$filename;
+        PostImage::create(['image'=>$filename, 'post_id'=>$post->id]);
+        return back()->with('status','Imagen cargada con exito');
     }
 }
